@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <style>
+
+
+
+#content {
+    padding: 20px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    outline: none;
+    min-height: 300px;
+    margin: 30px 0;
+}
+
+button {
+    background-color:#224e7b ;
+    color : #fff ;
+    border: none;
+    border-radius: 2px;
+    padding: 5px
+  }
+
+button:hover {
+      background-color:#07253a ;
+}
+
+</style>
+
+        <title>TEST</title>
+    </head>
+
+
+    <body>
+            <h1>Editeur de texte riche</h1>
+
+            <button id="new-btn" >
+                Effacer
+            </button>
+            <button id="txt-btn" >
+                ENR. TXT
+            </button>
+            <button id="pdf-btn" >
+                ENR. PDF
+            </button>
+
+            <input id="filename-input" type="text" value="PT_Nom" />
+            <button id="bold-btn">
+                Gras
+            </button>
+            <button id="underline-btn" >
+                Souligné
+            </button>
+            <button id="italic-btn">
+                Italique
+            </button>
+            <input id="color-btn" type="color" />
+
+            <div id="content" contenteditable="true" spellcheck="false"></div>
+
+            <div id="test" contenteditable="true" spellcheck="false">HAHAHAH</div>
+            
+        <script src="htmltopdf.js"></script>
+       
+
+        <script>
+const boldBtn = document.querySelector("#bold-btn")
+const underlineBtn = document.querySelector("#underline-btn")
+const italicBtn = document.querySelector("#italic-btn")
+const colorBtn = document.querySelector("#color-btn")
+
+const newBtn = document.querySelector("#new-btn")
+const txtBtn = document.querySelector("#txt-btn")
+const pdfBtn = document.querySelector("#pdf-btn")
+
+const content = document.querySelector("#content")
+const test = document.querySelector("#test")
+
+const filename = document.querySelector("#filename-input")
+
+boldBtn.addEventListener("click", () => {
+    document.execCommand("bold")
+})
+
+underlineBtn.addEventListener("click", () => {
+    document.execCommand("underline")
+})
+
+italicBtn.addEventListener("click", () => {
+    document.execCommand("italic")
+})
+
+colorBtn.addEventListener("input", () => {
+    document.execCommand("forecolor", false, colorBtn.value)
+})
+
+newBtn.addEventListener("click", () => {
+    content.innerHTML = ""
+})
+
+function datename(){
+    var date = new Date()
+    date = date.toISOString().split("T")[0]
+    var dspli = date.split("-")
+    return dspli[0] + dspli[1] + dspli[2] + "_"
+
+}
+
+txtBtn.addEventListener("click", () => {
+    const a = document.createElement("a")
+    const blob = new Blob([content.innerText])
+    const dataUrl = URL.createObjectURL(blob)
+    a.href = dataUrl
+    a.download =  datename() + filename.value + ".txt"
+    a.click()
+})
+
+pdfBtn.addEventListener('click', () => {
+    
+    html2pdf().from(content).save(datename() + filename.value)
+})
+        </script>
+    </body>
+</html>
