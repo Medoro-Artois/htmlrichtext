@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <style>
+
+#content {
+    padding: 20px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    outline: none;
+    min-height: 300px;
+    margin: 30px 0;
+}
+#content2 {
+    padding: 20px;
+    outline: none;
+    min-height: 300px;
+    margin: 30px 0;
+    text-align: justify;
+}
+
+input.inincont{
+    text-align: center;
+    border: none;
+    font-size: 22px;
+    width: 70%;
+}
+
+
+</style>
+
+        <title>TEST</title>
+    </head>
+
+
+    <body>
+            <h1>PAGE SIMPLE</h1>
+
+            <div id="content" contenteditable="false" spellcheck="true"> <center><img src="data:image/png;base64,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" alt="logo">
+                                                                         </br><h1>Note pour aider</h1></br><input class="inincont" title="Titre" placeholder="Titre"></center> 
+                <div id="content2" contenteditable="true" spellcheck="true">" Nous avons la preuve que des missiles ont été utilisés " </div>
+                
+            
+            </div>
+
+    </body>
+</html>
